@@ -8,6 +8,8 @@
 
 # Seaport.js
 
+**Just temporarily forking to get latest SDK for v1.4**
+
 [Seaport][seaport-link] is a new marketplace protocol for safely and efficiently buying and selling NFTs. This is a JavaScript library intended to make interfacing with the contract reasonable and easy.
 
 - [Synopsis](#synopsis)
