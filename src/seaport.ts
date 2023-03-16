@@ -106,7 +106,7 @@ export class Seaport {
       ascendingAmountFulfillmentBuffer = 300,
       balanceAndApprovalChecksOnOrderCreation = true,
       conduitKeyToConduit,
-      seaportVersion = "1.1",
+      seaportVersion = "1.4",
     }: SeaportConfig = {}
   ) {
     const provider =
@@ -239,6 +239,12 @@ export class Seaport {
     accountAddress?: string,
     exactApproval?: boolean
   ): Promise<OrderUseCase<CreateBulkOrdersAction>> {
+    if (this.config.seaportVersion === "1.1") {
+      throw new Error(
+        "Bulk order signatures are only available on Seaport v1.4"
+      );
+    }
+
     const signer = this._getSigner(accountAddress);
     const offerer = await signer.getAddress();
     const offererCounter = await this.getCounter(offerer);
@@ -372,7 +378,7 @@ export class Seaport {
       totalOriginalConsiderationItems: considerationItemsWithFees.length,
       salt: saltFollowingConditional,
       conduitKey,
-      counter: counter ?? (await this.getCounter(offerer)),
+      counter: (counter ?? (await this.getCounter(offerer))).toString(),
     };
 
     const approvalActions: ApprovalAction[] = [];
