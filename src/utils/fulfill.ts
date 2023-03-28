@@ -590,7 +590,6 @@ export async function fulfillAvailableOrders({
 
   let totalNativeAmount = BigNumber.from(0);
   const totalInsufficientApprovals: InsufficientApprovals = [];
-
   const criteriaOffersAndConsiderations = sanitizedOrdersMetadata
     .flatMap((orderMetadata) => [
       orderMetadata.order.parameters.offer,
